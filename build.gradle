@@ -29,7 +29,7 @@ ext {
     license = 'Apache 2'
 
     /* Dependencies */
-    trellisApiVersion = '0.2.0-SNAPSHOT'
+    trellisApiVersion = '0.2.0'
     trellisVocabularyVersion = '0.1.0'
     commonsRdfVersion = '0.3.0-incubating'
     jacksonVersion = '2.9.1'
@@ -74,10 +74,6 @@ repositories {
     jcenter()
     mavenCentral()
     mavenLocal()
-    // TODO -- remove this after the first release of the API
-    maven {
-        url "https://oss.sonatype.org/content/repositories/snapshots"
-    }
 }
 
 gradle.projectsEvaluated {
@@ -117,10 +113,6 @@ task javadocJar(type: Jar) {
 artifacts {
     archives javadocJar
     archives sourceJar
-    archives (file('build/resources/main/features.xml')) {
-        classifier 'features'
-        type 'xml'
-    }
 }
 
 jacoco {
