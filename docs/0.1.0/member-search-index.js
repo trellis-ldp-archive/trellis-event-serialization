@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"org.trellisldp.event","c":"EventSerializer","l":"EventSerializer()"},{"p":"org.trellisldp.event","c":"EventSerializer","l":"serialize(Event)","url":"serialize-org.trellisldp.api.Event-"}]
