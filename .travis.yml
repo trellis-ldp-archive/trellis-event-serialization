@@ -1,0 +1,20 @@
+language: java
+sudo: required
+dist: trusty
+group: edge
+
+addons:
+  apt:
+    packages:
+      - oracle-java9-installer
+  sonarcloud:
+    organization: "trellis-ldp"
+    token:
+      secure: "Agkiqf19OWd/DemwWiCHjLxWNtahyEwgvU0D/DhFMPYBUyeAIL26F1UVE8S9UuXu8BC6U2CTcbyF9GW0APW5qWXxt30kKCzN3BtR8K9/SljRIHz3PLAP6JRf2w6FeE82kyS8UFYZbrwvJpalQZP2B4vtN/p5kckuYp4yWd4XNx7T+BenDbPypI0vGFzgcNjsBNpOk2JZnqyfryYn8+zAAO9Gcgiw4PedS8xR5mtI7m7vlhE2G8it1SsNU8Vri938dXsI/fIrjC9COxNIo7HJW46LRpTsX0rs2x7iWby1lPvwHuzojIWkx1RWq+ss72gvh/b9BKwrMQ4x4afokLDn2sb6iG4HSYjiAsIMFc650wgvkaEFeKV4G7YpkGfPtUkeA4MSI6Yie+9h2hKSZHIvg7jpZ0PEIlv9ZbjNZl4B1tGi5u6EUjJVQOH0N/LGP2wUq6E1tv1UVkvyBvOG6nqYfgIh8j9zS3FKWkPzRMlsaIm1JiVOdEyensV6jzfeSYkRPKuNFnmUpxbi1Y9YQSHgde38NDtnJD/p31Y0LldR+Gh2N7bJwiXIWY8V9WZbxlsG+Zt9yzXTd9Vb+iKetv+OvxRnlYtPYtpOp57q4j/H+vwuZsZ+CnCO2IHXFC/megaAhRssw4PgR6O26kHuLzZHQUO3B9FzxQzpLnPQ7FUDe2w="
+
+jdk:
+  - oraclejdk8
+  - oraclejdk9
+
+after_success:
+  - ./gradlew jacocoTestReport coveralls sonarqube
