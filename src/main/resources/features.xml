@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.4.0" name="trellis-event-serialization-${project.version}">
+
+  <repository>mvn:org.trellisldp/trellis-vocabulary/${trellisVocabularyVersion}/xml/features</repository>
+  <repository>mvn:org.trellisldp/trellis-api/${trellisApiVersion}/xml/features</repository>
+
+  <feature name="trellis-event-serialization" version="${project.version}">
+    <details>Installs the Trellis Event Serialization bundle</details>
+
+    <feature>trellis-api</feature>
+    <feature>trellis-vocabulary</feature>
+
+    <bundle dependency="true">mvn:org.apache.commons/commons-rdf-api/${commonsRdfVersion}</bundle>
+    <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-core/${jacksonVersion}</bundle>
+    <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-databind/${jacksonVersion}</bundle>
+    <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-annotations/${jacksonVersion}</bundle>
+    <bundle dependency="true">mvn:com.fasterxml.jackson.datatype/jackson-datatype-jsr310/${jacksonVersion}</bundle>
+
+    <bundle dependency="true">mvn:org.apache.aries.spifly/org.apache.aries.spifly.dynamic.bundle/${spiflyVersion}</bundle>
+
+    <bundle>mvn:org.trellisldp/trellis-event-serialization/${project.version}</bundle>
+  </feature>
+</features>
