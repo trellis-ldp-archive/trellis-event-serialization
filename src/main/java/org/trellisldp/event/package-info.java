@@ -14,7 +14,7 @@
 /**
  * A package used for serializing Events into an Activity Stream JSON-LD representation.
  *
- * @see <a href="https://www.w3.org/TR/activitystreams-core/>Activity Streams 2.0</a>
+ * @see <a href="https://www.w3.org/TR/activitystreams-core/">Activity Streams 2.0</a>
  *
  * @author acoburn
  */
