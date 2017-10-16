@@ -12,7 +12,9 @@
  * limitations under the License.
  */
 /**
- * A package used for serializing Events into an Activity Stream JSON-LD representation.
+ * Trellis Event Serialization Implementation
+ * 
+ * <p>A package used for serializing Events into an Activity Stream JSON-LD representation.</p>
  *
  * @see <a href="https://www.w3.org/TR/activitystreams-core/">Activity Streams 2.0</a>
  *
