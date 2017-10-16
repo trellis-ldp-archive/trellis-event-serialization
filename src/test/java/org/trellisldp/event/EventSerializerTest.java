@@ -18,9 +18,10 @@ import static java.util.Collections.emptyList;
 import static java.util.Collections.singleton;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
+import static org.mockito.MockitoAnnotations.initMocks;
 import static org.trellisldp.vocabulary.AS.Create;
 import static org.trellisldp.vocabulary.LDP.Container;
 import static org.trellisldp.vocabulary.PROV.Activity;
@@ -33,18 +34,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.trellisldp.vocabulary.AS;
 import org.apache.commons.rdf.api.RDF;
 import org.apache.commons.rdf.simple.SimpleRDF;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.trellisldp.api.ActivityStreamService;
 import org.trellisldp.api.Event;
 
 /**
  * @author acoburn
  */
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(JUnitPlatform.class)
 public class EventSerializerTest {
 
     private static final RDF rdf = new SimpleRDF();
@@ -54,8 +55,9 @@ public class EventSerializerTest {
     @Mock
     private Event mockEvent;
 
-    @Before
+    @BeforeEach
     public void setUp() {
+        initMocks(this);
         when(mockEvent.getIdentifier()).thenReturn(rdf.createIRI("info:event/12345"));
         when(mockEvent.getAgents()).thenReturn(singleton(rdf.createIRI("info:user/test")));
         when(mockEvent.getTarget()).thenReturn(of(rdf.createIRI("trellis:repository/resource")));

@@ -35,7 +35,9 @@ ext {
     jacksonVersion = '2.9.2'
 
     /* Testing */
-    junitVersion = '4.12.1'
+    junitVersion = '5.0.1'
+    junitPlatformVersion = '1.0.1'
+    apiguardianVersion = '1.0.0'
     mockitoVersion = '2.11.0'
     jacocoVersion = "0.7.9"
 
@@ -59,7 +61,9 @@ dependencies {
     implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: jacksonVersion
     implementation group: 'org.trellisldp', name: 'trellis-vocabulary', version: trellisVocabularyVersion
 
-    testImplementation group: 'org.junit.vintage', name: 'junit-vintage-engine', version: junitVersion
+    testImplementation group: 'org.apiguardian', name: 'apiguardian-api', version: apiguardianVersion
+    testImplementation group: 'org.junit.platform', name: 'junit-platform-runner', version: junitPlatformVersion
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: junitVersion
     testImplementation group: 'org.mockito', name: 'mockito-core', version: mockitoVersion
     testImplementation group: 'org.apache.commons', name: 'commons-rdf-simple', version: commonsRdfVersion
 
