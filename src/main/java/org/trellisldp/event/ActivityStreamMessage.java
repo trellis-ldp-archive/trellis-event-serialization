@@ -120,7 +120,7 @@ class ActivityStreamMessage {
      * The created date
      */
     @JsonProperty("published")
-    public String getCreated() {
+    public String getPublished() {
         return published;
     }
 
