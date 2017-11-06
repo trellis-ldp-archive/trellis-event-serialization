@@ -13,6 +13,7 @@
  */
 package org.trellisldp.event;
 
+import static java.time.Instant.now;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singleton;
@@ -26,6 +27,7 @@ import static org.trellisldp.vocabulary.AS.Create;
 import static org.trellisldp.vocabulary.LDP.Container;
 import static org.trellisldp.vocabulary.PROV.Activity;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -52,6 +54,8 @@ public class EventSerializerTest {
 
     private final ActivityStreamService svc = new EventSerializer();
 
+    private final Instant time = now();
+
     @Mock
     private Event mockEvent;
 
@@ -64,6 +68,7 @@ public class EventSerializerTest {
         when(mockEvent.getTypes()).thenReturn(singleton(Create));
         when(mockEvent.getTargetTypes()).thenReturn(singleton(Container));
         when(mockEvent.getInbox()).thenReturn(of(rdf.createIRI("info:ldn/inbox")));
+        when(mockEvent.getCreated()).thenReturn(time);
     }
 
     @Test
@@ -89,6 +94,7 @@ public class EventSerializerTest {
         assertTrue(map.containsKey("inbox"));
         assertTrue(map.containsKey("actor"));
         assertTrue(map.containsKey("object"));
+        assertTrue(map.containsKey("published"));
 
         final List types = (List) map.get("type");
         assertTrue(types.contains("Create"));
@@ -101,6 +107,7 @@ public class EventSerializerTest {
 
         assertTrue(map.get("id").equals("info:event/12345"));
         assertTrue(map.get("inbox").equals("info:ldn/inbox"));
+        assertTrue(map.get("published").equals(time.toString()));
     }
 
     @Test
@@ -121,6 +128,7 @@ public class EventSerializerTest {
         assertFalse(map.containsKey("inbox"));
         assertFalse(map.containsKey("actor"));
         assertTrue(map.containsKey("object"));
+        assertTrue(map.containsKey("published"));
 
         final List types = (List) map.get("type");
         assertTrue(types.contains("Create"));
@@ -133,5 +141,6 @@ public class EventSerializerTest {
         assertTrue(AS.URI.contains((String) map.get("@context")));
 
         assertTrue(map.get("id").equals("info:event/12345"));
+        assertTrue(map.get("published").equals(time.toString()));
     }
 }
