@@ -17,4 +17,4 @@ jdk:
   - oraclejdk9
 
 after_success:
-  - ./gradlew jacocoTestReport coveralls sonarqube
+  - ./gradlew jacocoTestReport sonarqube
