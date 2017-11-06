@@ -19,6 +19,7 @@ import static java.util.stream.Collectors.toList;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import java.util.List;
 
 import org.apache.commons.rdf.api.IRI;
@@ -33,6 +34,7 @@ import org.trellisldp.vocabulary.AS;
  * @author acoburn
  */
 @JsonInclude(NON_ABSENT)
+@JsonPropertyOrder({"@context","id", "type", "inbox", "actor", "object", "published"})
 class ActivityStreamMessage {
 
     /**
@@ -75,6 +77,7 @@ class ActivityStreamMessage {
     private String inbox;
     private List<String> actor;
     private EventResource object;
+    private String published;
 
     /**
      * Get the event identifier
@@ -114,6 +117,14 @@ class ActivityStreamMessage {
     }
 
     /**
+     * The created date
+     */
+    @JsonProperty("published")
+    public String getCreated() {
+        return published;
+    }
+
+    /**
      * The JSON-LD context
      */
     @JsonProperty("@context")
@@ -132,6 +143,8 @@ class ActivityStreamMessage {
         msg.type = event.getTypes().stream().map(IRI::getIRIString)
             .map(type -> type.startsWith(AS.URI) ? type.substring(AS.URI.length()) : type)
             .collect(toList());
+
+        msg.published = event.getCreated().toString();
 
         final List<String> actors = event.getAgents().stream().map(IRI::getIRIString).collect(toList());
         msg.actor = actors.isEmpty() ? null : actors;

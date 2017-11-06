@@ -13,6 +13,7 @@
  */
 package org.trellisldp.event;
 
+import static java.time.Instant.now;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singleton;
@@ -64,6 +65,7 @@ public class EventSerializerTest {
         when(mockEvent.getTypes()).thenReturn(singleton(Create));
         when(mockEvent.getTargetTypes()).thenReturn(singleton(Container));
         when(mockEvent.getInbox()).thenReturn(of(rdf.createIRI("info:ldn/inbox")));
+        when(mockEvent.getCreated()).thenReturn(now());
     }
 
     @Test
@@ -89,6 +91,7 @@ public class EventSerializerTest {
         assertTrue(map.containsKey("inbox"));
         assertTrue(map.containsKey("actor"));
         assertTrue(map.containsKey("object"));
+        assertTrue(map.containsKey("published"));
 
         final List types = (List) map.get("type");
         assertTrue(types.contains("Create"));
@@ -101,6 +104,8 @@ public class EventSerializerTest {
 
         assertTrue(map.get("id").equals("info:event/12345"));
         assertTrue(map.get("inbox").equals("info:ldn/inbox"));
+        final String instant = map.get("published").toString();
+        assertTrue(map.get("published").equals(instant));
     }
 
     @Test
@@ -121,6 +126,7 @@ public class EventSerializerTest {
         assertFalse(map.containsKey("inbox"));
         assertFalse(map.containsKey("actor"));
         assertTrue(map.containsKey("object"));
+        assertTrue(map.containsKey("published"));
 
         final List types = (List) map.get("type");
         assertTrue(types.contains("Create"));
@@ -133,5 +139,7 @@ public class EventSerializerTest {
         assertTrue(AS.URI.contains((String) map.get("@context")));
 
         assertTrue(map.get("id").equals("info:event/12345"));
+        final String instant = map.get("published").toString();
+        assertTrue(map.get("published").equals(instant));
     }
 }
